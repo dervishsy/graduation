@@ -1,13 +1,12 @@
-package com.dervishsy.graduation;
+package ru.javaops.topjava2;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class GraduationApplication {
+public class RestaurantVotingApplication {
 
     public static void main(String[] args) {
-        SpringApplication.run(GraduationApplication.class, args);
+        SpringApplication.run(RestaurantVotingApplication.class, args);
     }
-
 }
