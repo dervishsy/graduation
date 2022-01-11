@@ -10,16 +10,18 @@ import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import java.io.Serial;
 import java.io.Serializable;
+import java.time.LocalDate;
 
 @Entity
-@Table(name = "MENU_ITEMS")
+@Table(name = "menu_items")
 @Getter
 @Setter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
+@AllArgsConstructor(access = AccessLevel.PUBLIC)
 @ToString(callSuper = true)
 public class MenuItem extends NamedEntity implements HasId, Serializable {
     @Serial
-    private static final long serialVersionUID = 1002L;
+    private static final long serialVersionUID = 1L;
 
     @JoinColumn(name = "restaurant_id", nullable = false)
     @NotBlank
@@ -29,7 +31,17 @@ public class MenuItem extends NamedEntity implements HasId, Serializable {
     @ToString.Exclude
     private Restaurant restaurant;
 
-    public MenuItem(Integer id, String name) {
+    @Column(name = "date", nullable = false)
+    @NotBlank
+    private LocalDate date;
+
+    @Column(name = "price", nullable = false)
+    private int price;
+
+    public MenuItem(Integer id, String name, LocalDate date,Integer price) {
         super(id, name);
+        this.date = date;
+        this.price = price;
+
     }
 }

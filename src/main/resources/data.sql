@@ -7,17 +7,16 @@ VALUES ('USER', 1),
        ('ADMIN', 2),
        ('USER', 2);
 
-INSERT INTO restaurants (name)
-VALUES ('macdonald''s'),
+INSERT INTO RESTAURANTS (name)
+VALUES ('McDonald''s'),
        ('Noma Copenhagen, Denmark'),
        ('Maison Premiere New York, US');
 
-INSERT INTO MENU_ITEMS (RESTAURANT_ID,NAME)
-VALUES (1,'Big Mac'),
-       (1,'Iced Coffee'),
-       (1,'Hash Browns'),
-       (1,'Coca-Cola');
+INSERT INTO MENU_ITEMS (restaurant_id, name, date,price)
+VALUES (1, 'Big Mac', '2022-01-01',200),
+       (1, 'Iced Coffee', '2022-01-01',100),
+       (1, 'Hash Browns', '2022-01-01',150),
+       (1, 'Coca-Cola', '2022-01-01',50);
 
-INSERT INTO VOTES (RESTAURANT_ID,USER_ID,DATE_TIME)
-VALUES 
-	(1,1,'2021-12-30 10:00:00');
+INSERT INTO VOTES (restaurant_id, user_id, date)
+VALUES (1, 1, '2021-12-30');

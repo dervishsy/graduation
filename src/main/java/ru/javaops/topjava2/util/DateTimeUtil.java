@@ -41,4 +41,8 @@ public class DateTimeUtil {
     LocalTime parseLocalTime(@Nullable String str) {
         return StringUtils.hasLength(str) ? LocalTime.parse(str) : null;
     }
+
+    public static LocalDate getCurrentDate(){
+        return LocalDate.of(2022,1,1);
+    }
 }

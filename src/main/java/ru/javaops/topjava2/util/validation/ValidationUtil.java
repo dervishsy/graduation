@@ -6,8 +6,20 @@ import org.springframework.lang.NonNull;
 import ru.javaops.topjava2.HasId;
 import ru.javaops.topjava2.error.IllegalRequestDataException;
 
+import java.time.LocalDate;
+import java.time.LocalTime;
+
 @UtilityClass
 public class ValidationUtil {
+    final LocalTime MAX_TIME_TO_VOTE_PREVIOUS_DAY = LocalTime.of(11, 0);
+    final String MAX_TIME_TO_VOTE_PREVIOUS_DAY_AS_STRING = "11:00";
+
+    public static void checkIsValidVoteTime(LocalDate dateOfVote) {
+        LocalTime time = LocalTime.now();
+        if (time.isAfter(MAX_TIME_TO_VOTE_PREVIOUS_DAY)) {
+            throw new IllegalRequestDataException("Vote for current day has exist. Change is possible before " + MAX_TIME_TO_VOTE_PREVIOUS_DAY_AS_STRING);
+        }
+    }
 
     public static void checkNew(HasId bean) {
         if (!bean.isNew()) {

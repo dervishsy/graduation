@@ -11,10 +11,10 @@ import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.io.Serial;
 import java.io.Serializable;
-import java.time.LocalDateTime;
+import java.time.LocalDate;
 
 @Entity
-@Table(name = "VOTES")
+@Table(name = "votes")
 @Getter
 @Setter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
@@ -22,7 +22,7 @@ import java.time.LocalDateTime;
 @ToString(callSuper = true)
 public class Vote extends BaseEntity implements HasId, Serializable {
     @Serial
-    private static final long serialVersionUID = 1003L;
+    private static final long serialVersionUID = 1L;
 
     @JoinColumn(name = "restaurant_id", nullable = false)
     @ManyToOne(fetch = FetchType.LAZY)
@@ -36,9 +36,9 @@ public class Vote extends BaseEntity implements HasId, Serializable {
     @ToString.Exclude
     private User user;
 
-    @Column(name = "date_time", nullable = false)
+    @Column(name = "date", nullable = false)
     @NotNull
     @DateTimeFormat(pattern = DateTimeUtil.DATE_TIME_PATTERN)
-    private LocalDateTime dateTime;
+    private LocalDate date;
 
 }

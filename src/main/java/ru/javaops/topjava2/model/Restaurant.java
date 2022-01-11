@@ -1,5 +1,6 @@
 package ru.javaops.topjava2.model;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.*;
 import org.hibernate.annotations.OnDelete;
@@ -23,12 +24,13 @@ import java.util.List;
 public class Restaurant extends NamedEntity implements HasId, Serializable {
     // TODO add address , url
     @Serial
-    private static final long serialVersionUID = 1001L;
+    private static final long serialVersionUID = 1L;
 
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "restaurant")//, cascade = CascadeType.REMOVE, orphanRemoval = true)
     @OnDelete(action = OnDeleteAction.CASCADE) //https://stackoverflow.com/a/44988100/548473
     @JsonManagedReference
     @ToString.Exclude
+    @JsonInclude(JsonInclude.Include.NON_NULL)
     private List<MenuItem> menu;
 
     public Restaurant(Integer id, String name) {

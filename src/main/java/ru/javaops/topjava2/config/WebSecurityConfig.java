@@ -55,5 +55,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .and().httpBasic()
                 .and().sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
                 .and().csrf().disable();
+        // h2 -console
+        // https://stackoverflow.com/questions/53395200/h2-console-is-not-showing-in-browser
+        http.headers().frameOptions().disable();
     }
 }

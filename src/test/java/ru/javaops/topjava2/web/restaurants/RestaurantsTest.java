@@ -7,7 +7,7 @@ import org.springframework.security.test.context.support.WithUserDetails;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import ru.javaops.topjava2.repository.RestaurantRepository;
 import ru.javaops.topjava2.web.AbstractControllerTest;
-import ru.javaops.topjava2.web.restaurant.RestaurantController;
+import ru.javaops.topjava2.web.restaurant.AdminRestaurantController;
 
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
@@ -16,7 +16,7 @@ import static ru.javaops.topjava2.web.restaurants.RestaurantsTestData.*;
 import static ru.javaops.topjava2.web.user.UserTestData.ADMIN_MAIL;
 
 public class RestaurantsTest extends AbstractControllerTest {
-    private static final String REST_URL = RestaurantController.REST_URL + '/';
+    private static final String REST_URL = AdminRestaurantController.REST_URL + '/';
 
     @Autowired
     private RestaurantRepository repository;
