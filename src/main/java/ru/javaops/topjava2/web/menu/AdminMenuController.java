@@ -1,6 +1,7 @@
 package ru.javaops.topjava2.web.menu;
 
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.CacheConfig;
 import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.http.HttpStatus;
@@ -9,6 +10,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 import ru.javaops.topjava2.model.MenuItem;
+import ru.javaops.topjava2.repository.MenuRepository;
 
 import javax.validation.Valid;
 import java.net.URI;
@@ -21,8 +23,11 @@ import static ru.javaops.topjava2.util.validation.ValidationUtil.checkNew;
 @RequestMapping(value = AdminMenuController.REST_URL, produces = MediaType.APPLICATION_JSON_VALUE)
 @Slf4j
 @CacheConfig(cacheNames = "menu")
-public class AdminMenuController extends AbstractMenuController {
+public class AdminMenuController {
     public static final String REST_URL = "/api/admin/menu";
+
+    @Autowired
+    MenuRepository repository;
 
     @GetMapping("/{id}")
     public ResponseEntity<MenuItem> get(@PathVariable int id) {
@@ -64,12 +69,5 @@ public class AdminMenuController extends AbstractMenuController {
         assureIdConsistent(menuItem, id);
 
         repository.save(menuItem);
-    }
-
-    @GetMapping("/byRestaurant/{restaurant_id}")
-    public List<MenuItem> getByRestaurant(@PathVariable int restaurant_id) {
-        log.info("findAllByRestaurant {}", restaurant_id);
-
-        return repository.findAllByRestaurant(restaurant_id);
     }
 }
