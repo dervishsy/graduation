@@ -11,7 +11,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 import ru.javaops.topjava2.model.Restaurant;
-import ru.javaops.topjava2.repository.MenuRepository;
 import ru.javaops.topjava2.repository.RestaurantRepository;
 
 import javax.validation.Valid;
@@ -30,9 +29,6 @@ public class AdminRestaurantController {
 
     @Autowired
     RestaurantRepository repository;
-
-    @Autowired
-    MenuRepository menuRepository;
 
     @GetMapping("/{id}")
     public ResponseEntity<Restaurant> get(@PathVariable int id) {

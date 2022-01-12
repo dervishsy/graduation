@@ -28,4 +28,6 @@ public interface RestaurantRepository extends BaseRepository<Restaurant> {
     @Query("SELECT r FROM Restaurant r left join r.menu m where r.id = ?1 and m.date=?2")
     Optional<Restaurant> findWithMenuOnDateById(int id, LocalDate date);
 
+
+
 }
