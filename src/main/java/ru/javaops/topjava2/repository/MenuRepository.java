@@ -4,7 +4,6 @@ import org.springframework.data.jpa.repository.EntityGraph;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.transaction.annotation.Transactional;
 import ru.javaops.topjava2.model.MenuItem;
-import ru.javaops.topjava2.model.Restaurant;
 
 import java.time.LocalDate;
 import java.util.List;
@@ -18,5 +17,5 @@ public interface MenuRepository extends BaseRepository<MenuItem> {
     @Query("SELECT m FROM MenuItem m WHERE m.restaurant.id=?1")
     List<MenuItem> findAllByRestaurant(int restaurant_id);
 
-    List<MenuItem> getMenuItemByRestaurantAndDate(Restaurant r, LocalDate date);
+    List<MenuItem> getMenuItemByRestaurantIdAndDate(int id, LocalDate date);
 }

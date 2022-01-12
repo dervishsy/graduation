@@ -14,6 +14,9 @@ import javax.validation.Valid;
 import java.net.URI;
 import java.util.List;
 
+import static ru.javaops.topjava2.util.validation.ValidationUtil.assureIdConsistent;
+import static ru.javaops.topjava2.util.validation.ValidationUtil.checkNew;
+
 @RestController
 @RequestMapping(value = AdminMenuController.REST_URL, produces = MediaType.APPLICATION_JSON_VALUE)
 @Slf4j
@@ -42,16 +45,31 @@ public class AdminMenuController extends AbstractMenuController {
     @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
     @CacheEvict(allEntries = true)
     public ResponseEntity<MenuItem> create(@Valid @RequestBody MenuItem menuItem) {
+        log.info("create {}", menuItem);
+        checkNew(menuItem);
+
         MenuItem created = repository.save(menuItem);
+
         URI uriOfNewResource = ServletUriComponentsBuilder.fromCurrentContextPath()
                 .path(REST_URL + "/{id}")
                 .buildAndExpand(created.getId()).toUri();
         return ResponseEntity.created(uriOfNewResource).body(created);
     }
 
+    @PutMapping(value = "/{id}", consumes = MediaType.APPLICATION_JSON_VALUE)
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    @CacheEvict(allEntries = true)
+    public void update(@Valid @RequestBody MenuItem menuItem, @PathVariable int id) {
+        log.info("update {} with id={}", menuItem, id);
+        assureIdConsistent(menuItem, id);
+
+        repository.save(menuItem);
+    }
+
     @GetMapping("/byRestaurant/{restaurant_id}")
     public List<MenuItem> getByRestaurant(@PathVariable int restaurant_id) {
-        log.info("findAllByRestaurant");
+        log.info("findAllByRestaurant {}", restaurant_id);
+
         return repository.findAllByRestaurant(restaurant_id);
     }
 }
