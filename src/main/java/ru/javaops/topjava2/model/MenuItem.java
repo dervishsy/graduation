@@ -38,10 +38,4 @@ public class MenuItem extends NamedEntity implements HasId, Serializable {
     @Column(name = "price", nullable = false)
     private int price;
 
-    public MenuItem(Integer id, String name, LocalDate date,Integer price) {
-        super(id, name);
-        this.date = date;
-        this.price = price;
-
-    }
 }

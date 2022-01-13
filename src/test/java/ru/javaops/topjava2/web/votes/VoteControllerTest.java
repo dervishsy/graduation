@@ -4,7 +4,6 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.security.test.context.support.WithUserDetails;
-import org.springframework.test.web.servlet.ResultActions;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import ru.javaops.topjava2.model.Vote;
 import ru.javaops.topjava2.repository.RestaurantRepository;
@@ -18,8 +17,8 @@ import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 import static ru.javaops.topjava2.util.JsonUtil.writeValue;
-import static ru.javaops.topjava2.web.restaurants.RestaurantsTestData.MCDONALDS_ID;
 import static ru.javaops.topjava2.web.user.UserTestData.USER_MAIL;
+import static ru.javaops.topjava2.web.votes.VoteTestData.MCDONALDS_ID;
 
 class VoteControllerTest extends AbstractControllerTest {
     private static final String REST_URL = UserVoteController.REST_URL + '/';
@@ -52,7 +51,7 @@ class VoteControllerTest extends AbstractControllerTest {
                 SecurityUtil.authUser(),
                 DateTimeUtil.getCurrentDate());
 
-        ResultActions action = perform(MockMvcRequestBuilders.post(REST_URL + MCDONALDS_ID)
+        perform(MockMvcRequestBuilders.post(REST_URL + MCDONALDS_ID)
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(writeValue(expected)))
                 .andDo(print())
