@@ -19,4 +19,4 @@ VALUES (1, 'Big Mac', '2022-01-01',200),
        (1, 'Coca-Cola', '2022-01-01',50);
 
 INSERT INTO VOTES (restaurant_id, user_id, date)
-VALUES (1, 1, '2021-12-30');
+VALUES (1, 1, '2021-01-01');

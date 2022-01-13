@@ -15,10 +15,10 @@ import ru.javaops.topjava2.util.DateTimeUtil;
 import java.util.List;
 
 @RestController
-@RequestMapping(value = ProfileMenuController.REST_URL, produces = MediaType.APPLICATION_JSON_VALUE)
+@RequestMapping(value = UserMenuController.REST_URL, produces = MediaType.APPLICATION_JSON_VALUE)
 @Slf4j
 @CacheConfig(cacheNames = "menu")
-public class ProfileMenuController {
+public class UserMenuController {
     public static final String REST_URL = "/api/menu";
 
     @Autowired

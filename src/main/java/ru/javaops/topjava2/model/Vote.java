@@ -41,4 +41,10 @@ public class Vote extends BaseEntity implements HasId, Serializable {
     @DateTimeFormat(pattern = DateTimeUtil.DATE_TIME_PATTERN)
     private LocalDate date;
 
+    public Vote(Integer id, Restaurant restaurant, User user, LocalDate date) {
+        super(id);
+        this.restaurant = restaurant;
+        this.user = user;
+        this.date = date;
+    }
 }

@@ -43,6 +43,6 @@ public class DateTimeUtil {
     }
 
     public static LocalDate getCurrentDate(){
-        return LocalDate.of(2022,1,1);
+        return LocalDate.now();
     }
 }
