@@ -19,6 +19,8 @@ import java.net.URI;
 import java.time.LocalDate;
 import java.util.Optional;
 
+import static ru.javaops.topjava2.util.validation.ValidationUtil.checkIsValidVoteTime;
+
 @RestController
 @RequestMapping(value = UserVoteController.REST_URL, produces = MediaType.APPLICATION_JSON_VALUE)
 @Slf4j
@@ -40,6 +42,9 @@ public class UserVoteController {
 
     @PutMapping(value = "/{restaurantId}")
     public ResponseEntity<Vote> change_vote(@PathVariable int restaurantId) {
+        log.info("change_vote {} {}",SecurityUtil.authUser(),restaurantId);
+        checkIsValidVoteTime();
+
         LocalDate dateOfVote = DateTimeUtil.getCurrentDate();
 
         Restaurant restaurant = restaurantRepository.findById(restaurantId)
@@ -58,6 +63,7 @@ public class UserVoteController {
 
     @PostMapping(value = "/{restaurantId}")
     public ResponseEntity<Vote> vote(@PathVariable int restaurantId) {
+        log.info("vote {} {}",SecurityUtil.authUser(),restaurantId);
         LocalDate dateOfVote = DateTimeUtil.getCurrentDate();
 
         Restaurant restaurant = restaurantRepository.findById(restaurantId)
