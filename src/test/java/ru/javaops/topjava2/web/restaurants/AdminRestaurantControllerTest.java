@@ -18,7 +18,7 @@ import static ru.javaops.topjava2.util.JsonUtil.writeValue;
 import static ru.javaops.topjava2.web.restaurants.RestaurantsTestData.*;
 import static ru.javaops.topjava2.web.user.UserTestData.ADMIN_MAIL;
 
-public class RestaurantsTest extends AbstractControllerTest {
+public class AdminRestaurantControllerTest extends AbstractControllerTest {
     private static final String REST_URL = AdminRestaurantController.REST_URL + '/';
 
     @Autowired

@@ -7,6 +7,7 @@ import org.hibernate.annotations.OnDeleteAction;
 import ru.javaops.topjava2.HasId;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 import java.io.Serial;
 import java.io.Serializable;
 import java.time.LocalDate;
@@ -23,7 +24,7 @@ public class MenuItem extends NamedEntity implements HasId, Serializable {
     private static final long serialVersionUID = 1L;
 
     @JoinColumn(name = "restaurant_id", nullable = false)
-//    @NotBlank
+    @NotNull
     @ManyToOne(fetch = FetchType.LAZY)
     @JsonBackReference
     @OnDelete(action = OnDeleteAction.CASCADE)
@@ -31,10 +32,11 @@ public class MenuItem extends NamedEntity implements HasId, Serializable {
     private Restaurant restaurant;
 
     @Column(name = "date", nullable = false)
-//    @NotBlank
+    @NotNull
     private LocalDate date;
 
     @Column(name = "price", nullable = false)
+    @NotNull
     private int price;
 
     public MenuItem(Integer id, String name, Restaurant restaurant, LocalDate date, int price) {

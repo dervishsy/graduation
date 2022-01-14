@@ -27,12 +27,14 @@ public class Vote extends BaseEntity implements HasId, Serializable {
     @JoinColumn(name = "restaurant_id", nullable = false)
     @ManyToOne(fetch = FetchType.LAZY)
     @OnDelete(action = OnDeleteAction.CASCADE)
+    @NotNull
     @ToString.Exclude
     private Restaurant restaurant;
 
     @JoinColumn(name = "user_id", nullable = false)
     @ManyToOne(fetch = FetchType.LAZY)
     @OnDelete(action = OnDeleteAction.CASCADE)
+    @NotNull
     @ToString.Exclude
     private User user;
 
