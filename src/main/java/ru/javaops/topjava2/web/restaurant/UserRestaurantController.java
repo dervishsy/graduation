@@ -3,6 +3,7 @@ package ru.javaops.topjava2.web.restaurant;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.CacheConfig;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -32,6 +33,7 @@ public class UserRestaurantController {
     MenuRepository menuRepository;
 
     @GetMapping()
+    @Cacheable
     public List<Restaurant> getAllWithMenu() {
         log.info("with-menu");
         List<Restaurant> restaurants = repository.findAll();
@@ -40,6 +42,7 @@ public class UserRestaurantController {
     }
 
     @GetMapping("/{id}")
+    @Cacheable
     public ResponseEntity<Restaurant> getWithMenuById(@PathVariable int id) {
         log.info("{}/with-current-menu", id);
         Restaurant restaurant = repository.findById(id)
