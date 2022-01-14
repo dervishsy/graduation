@@ -9,8 +9,11 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
+import ru.javaops.topjava2.error.IllegalRequestDataException;
 import ru.javaops.topjava2.model.MenuItem;
+import ru.javaops.topjava2.model.Restaurant;
 import ru.javaops.topjava2.repository.MenuRepository;
+import ru.javaops.topjava2.repository.RestaurantRepository;
 
 import javax.validation.Valid;
 import java.net.URI;
@@ -28,6 +31,9 @@ public class AdminMenuController {
 
     @Autowired
     MenuRepository repository;
+
+    @Autowired
+    RestaurantRepository restaurantRepository;
 
     @GetMapping("/{id}")
     public ResponseEntity<MenuItem> get(@PathVariable int id) {
@@ -47,11 +53,14 @@ public class AdminMenuController {
         repository.deleteExisted(id);
     }
 
-    @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
+    @PostMapping(value = "/{restaurantId}", consumes = MediaType.APPLICATION_JSON_VALUE)
     @CacheEvict(allEntries = true)
-    public ResponseEntity<MenuItem> create(@Valid @RequestBody MenuItem menuItem) {
+    public ResponseEntity<MenuItem> create(@Valid @RequestBody MenuItem menuItem, @PathVariable int restaurantId) {
         log.info("create {}", menuItem);
         checkNew(menuItem);
+        Restaurant restaurant = restaurantRepository.findById(restaurantId)
+                .orElseThrow(() -> new IllegalRequestDataException("Restaurant not found Id:" + restaurantId));
+        menuItem.setRestaurant(restaurant);
 
         MenuItem created = repository.save(menuItem);
 

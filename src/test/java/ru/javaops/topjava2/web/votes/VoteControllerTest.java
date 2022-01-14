@@ -59,6 +59,7 @@ class VoteControllerTest extends AbstractControllerTest {
                 .andExpect(status().isCreated());
 
     }
+
     @Test
     @WithUserDetails(value = USER_MAIL)
     void voteExist() throws Exception {
@@ -70,7 +71,7 @@ class VoteControllerTest extends AbstractControllerTest {
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(writeValue(expected)))
                 .andDo(print())
-                .andExpect(status().isCreated());
+                .andExpect(status().isUnprocessableEntity());
 
     }
 }

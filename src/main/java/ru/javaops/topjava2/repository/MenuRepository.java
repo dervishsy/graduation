@@ -16,6 +16,4 @@ public interface MenuRepository extends BaseRepository<MenuItem> {
     List<MenuItem> findAll();
 
     List<MenuItem> getMenuItemByRestaurantIdAndDate(int id, LocalDate date);
-
-    List<MenuItem> getMenuItemByDate(LocalDate date);
 }

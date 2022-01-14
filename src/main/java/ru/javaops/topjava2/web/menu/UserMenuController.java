@@ -24,15 +24,8 @@ public class UserMenuController {
     @Autowired
     MenuRepository repository;
 
-    @GetMapping()
-    public List<MenuItem> getAllForCurrentDay() {
-        log.info("getAll Menu");
-
-        return repository.getMenuItemByDate(DateTimeUtil.getCurrentDate());
-    }
-
     @GetMapping("/{restaurant_id}")
-    public List<MenuItem> getByRestaurant(@PathVariable int restaurant_id) {
+    public List<MenuItem> getAllMenuByRestaurant(@PathVariable int restaurant_id) {
         log.info("getByRestaurant {}", restaurant_id);
 
         return repository.getMenuItemByRestaurantIdAndDate(restaurant_id, DateTimeUtil.getCurrentDate());
