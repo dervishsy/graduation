@@ -12,6 +12,8 @@ import ru.javaops.topjava2.util.DateTimeUtil;
 import ru.javaops.topjava2.util.JsonUtil;
 import ru.javaops.topjava2.web.AbstractControllerTest;
 
+import java.math.BigDecimal;
+
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
@@ -83,7 +85,7 @@ class AdminMenuControllerTest extends AbstractControllerTest {
     @Test
     @WithUserDetails(value = ADMIN_MAIL)
     void update() throws Exception {
-        MenuItem updated = new MenuItem(null, "Very Big Mac", MCDONALDS, DateTimeUtil.getCurrentDate(), 200);
+        MenuItem updated = new MenuItem(null, "Very Big Mac", MCDONALDS, DateTimeUtil.getCurrentDate(), new BigDecimal("200.20"));
         perform(MockMvcRequestBuilders.put(REST_URL + BIG_MAC_ID)
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(JsonUtil.writeValue(updated)))
