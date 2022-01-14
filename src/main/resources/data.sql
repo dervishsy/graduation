@@ -13,10 +13,10 @@ VALUES ('McDonald''s'),
        ('Maison Premiere New York, US');
 
 INSERT INTO MENU_ITEMS (restaurant_id, name, date,price)
-VALUES (1, 'Big Mac', '2022-01-01',200),
-       (1, 'Iced Coffee', '2022-01-01',100),
-       (1, 'Hash Browns', '2022-01-01',150),
-       (1, 'Coca-Cola', '2022-01-01',50);
+VALUES (1, 'Big Mac', current_date,200),
+       (1, 'Iced Coffee', current_date,100),
+       (1, 'Hash Browns', current_date,150),
+       (1, 'Coca-Cola', current_date,50);
 
 INSERT INTO VOTES (restaurant_id, user_id, date)
-VALUES (1, 1, '2021-01-01');
+VALUES (1, 1, current_date);

@@ -17,6 +17,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 import static ru.javaops.topjava2.util.JsonUtil.writeValue;
+import static ru.javaops.topjava2.web.user.UserTestData.ADMIN_MAIL;
 import static ru.javaops.topjava2.web.user.UserTestData.USER_MAIL;
 import static ru.javaops.topjava2.web.votes.VoteTestData.MCDONALDS_ID;
 
@@ -45,8 +46,22 @@ class VoteControllerTest extends AbstractControllerTest {
     }
 
     @Test
-    @WithUserDetails(value = USER_MAIL)
+    @WithUserDetails(value = ADMIN_MAIL)
     void vote() throws Exception {
+        Vote expected = new Vote(restaurantRepository.getById(MCDONALDS_ID),
+                SecurityUtil.authUser(),
+                DateTimeUtil.getCurrentDate());
+
+        perform(MockMvcRequestBuilders.post(REST_URL + MCDONALDS_ID)
+                .contentType(MediaType.APPLICATION_JSON)
+                .content(writeValue(expected)))
+                .andDo(print())
+                .andExpect(status().isCreated());
+
+    }
+    @Test
+    @WithUserDetails(value = USER_MAIL)
+    void voteExist() throws Exception {
         Vote expected = new Vote(restaurantRepository.getById(MCDONALDS_ID),
                 SecurityUtil.authUser(),
                 DateTimeUtil.getCurrentDate());
