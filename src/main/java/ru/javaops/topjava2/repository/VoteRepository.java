@@ -20,5 +20,4 @@ public interface VoteRepository extends BaseRepository<Vote> {
 
     @EntityGraph(attributePaths = {"restaurant", "user"}, type = EntityGraph.EntityGraphType.LOAD)
     Optional<Vote> findVoteByUserAndDate(User user, LocalDate date);
-
 }

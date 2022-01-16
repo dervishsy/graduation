@@ -19,10 +19,11 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import static ru.javaops.topjava2.util.JsonUtil.writeValue;
 import static ru.javaops.topjava2.web.user.UserTestData.ADMIN_MAIL;
 import static ru.javaops.topjava2.web.user.UserTestData.USER_MAIL;
-import static ru.javaops.topjava2.web.votes.VoteTestData.MCDONALDS_ID;
 
 class VoteControllerTest extends AbstractControllerTest {
     private static final String REST_URL = UserVoteController.REST_URL + '/';
+    public static final MatcherFactory.Matcher<Vote> VOTE_MATCHER = MatcherFactory.usingEqualsComparator(Vote.class);
+    public static final int MCDONALDS_ID = 1;
 
     @Autowired
     VoteRepository voteRepository;

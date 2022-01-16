@@ -37,5 +37,4 @@ class UserMenuControllerTest extends AbstractControllerTest {
                 .andExpect(content().contentTypeCompatibleWith(MediaType.APPLICATION_JSON))
                 .andExpect(MENU_MATCHER.contentJson(expected));
     }
-
 }

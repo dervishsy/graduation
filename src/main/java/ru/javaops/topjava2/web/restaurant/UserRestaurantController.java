@@ -17,6 +17,7 @@ import ru.javaops.topjava2.repository.RestaurantRepository;
 import ru.javaops.topjava2.util.DateTimeUtil;
 
 import java.util.List;
+import java.util.Objects;
 import java.util.Optional;
 
 @RestController
@@ -37,7 +38,9 @@ public class UserRestaurantController {
     public List<Restaurant> getAllWithMenu() {
         log.info("with-menu");
         List<Restaurant> restaurants = repository.findAll();
-        restaurants.forEach(r -> r.setMenu(menuRepository.getMenuItemByRestaurantIdAndDate(r.getId(), DateTimeUtil.getCurrentDate())));
+        restaurants.stream()
+                .filter(Objects::nonNull)
+                .forEach(r -> r.setMenu(menuRepository.getMenuItemByRestaurantIdAndDate(r.getId(), DateTimeUtil.getCurrentDate())));
         return restaurants;
     }
 

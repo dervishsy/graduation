@@ -28,7 +28,7 @@ public class UserMenuController {
     @GetMapping("/{restaurant_id}")
     @Cacheable
     public List<MenuItem> getAllMenuByRestaurant(@PathVariable int restaurant_id) {
-        log.info("getByRestaurant {}", restaurant_id);
+        log.info("getAllMenuByRestaurant {}", restaurant_id);
 
         return repository.getMenuItemByRestaurantIdAndDate(restaurant_id, DateTimeUtil.getCurrentDate());
     }

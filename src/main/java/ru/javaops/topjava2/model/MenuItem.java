@@ -42,7 +42,7 @@ public class MenuItem extends NamedEntity implements HasId, Serializable {
     @Column(name = "price", nullable = false)
     @NotNull
     @DecimalMin(value = "0.0", inclusive = false)
-    @Digits(integer=10, fraction=2)
+    @Digits(integer = 10, fraction = 2)
     @JsonSerialize(using = BigDecimalSerialize.class)
     private BigDecimal price;
 

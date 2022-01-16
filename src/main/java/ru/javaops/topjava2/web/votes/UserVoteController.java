@@ -35,21 +35,21 @@ public class UserVoteController {
     @GetMapping()
     public Optional<Vote> get() {
         log.info("getCurrentVote");
-        return repository.findVoteByUserAndDate(SecurityUtil.authUser(),DateTimeUtil.getCurrentDate());
+        return repository.findVoteByUserAndDate(SecurityUtil.authUser(), DateTimeUtil.getCurrentDate());
     }
 
     @PutMapping(value = "/{restaurantId}")
     public ResponseEntity<Vote> change_vote(@PathVariable int restaurantId) {
-        log.info("change_vote {} {}",SecurityUtil.authUser(),restaurantId);
+        log.info("change_vote {} {}", SecurityUtil.authUser(), restaurantId);
         checkIsValidVoteTime();
 
         LocalDate dateOfVote = DateTimeUtil.getCurrentDate();
 
         Restaurant restaurant = restaurantRepository.findById(restaurantId)
-                .orElseThrow(()->new IllegalRequestDataException("Restaurant not found Id:"+restaurantId));
+                .orElseThrow(() -> new IllegalRequestDataException("Restaurant not found Id:" + restaurantId));
 
         Vote vote = repository.findVoteByUserAndDate(SecurityUtil.authUser(), dateOfVote)
-                .orElseThrow(()->new IllegalRequestDataException("Vote not exist"));
+                .orElseThrow(() -> new IllegalRequestDataException("Vote not exist"));
 
         vote.setRestaurant(restaurant);
         Vote created = repository.save(vote);
@@ -61,11 +61,11 @@ public class UserVoteController {
 
     @PostMapping(value = "/{restaurantId}")
     public ResponseEntity<Vote> vote(@PathVariable int restaurantId) {
-        log.info("vote {} {}",SecurityUtil.authUser(),restaurantId);
+        log.info("vote {} {}", SecurityUtil.authUser(), restaurantId);
         LocalDate dateOfVote = DateTimeUtil.getCurrentDate();
 
         Restaurant restaurant = restaurantRepository.findById(restaurantId)
-                .orElseThrow(()->new IllegalRequestDataException("Restaurant not found Id:"+restaurantId));
+                .orElseThrow(() -> new IllegalRequestDataException("Restaurant not found Id:" + restaurantId));
 
         if (repository.findVoteByUserAndDate(SecurityUtil.authUser(), dateOfVote).isPresent()) {
             throw new IllegalRequestDataException("Vote for current day is exist");
@@ -78,5 +78,4 @@ public class UserVoteController {
                 .buildAndExpand().toUri();
         return ResponseEntity.created(uriOfNewResource).body(created);
     }
-
 }

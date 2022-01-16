@@ -52,6 +52,7 @@ public class AdminMenuController {
     @DeleteMapping("/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public void delete(@PathVariable int id) {
+        log.info("delete {}", id);
         repository.deleteExisted(id);
     }
 
